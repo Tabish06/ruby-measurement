@@ -9,6 +9,7 @@ class Measurement
   SCIENTIFIC_REGEX  = /\A#{SCIENTIFIC_NUMBER}\s*#{UNIT_REGEX}?\z/.freeze
   RATIONAL_REGEX    = /\A([+-]?\d+\s+)?((\d+)\/(\d+))?\s*#{UNIT_REGEX}?\z/.freeze
   COMPLEX_REGEX     = /\A#{SCIENTIFIC_NUMBER}?#{SCIENTIFIC_NUMBER}i\s*#{UNIT_REGEX}?\z/.freeze
+  ALPHABET_REGEX    = /[A-z]/.freeze
 
   RATIOS = {
     '¼' => '1/4',
@@ -100,16 +101,15 @@ class Measurement
   end
 
   class << self
-    def parse(str = '0')
+    def parse(str = '0', unit_name = nil)
+      str += " #{unit_name}" if !unit_name.nil? && !ALPHABET_REGEX.match(str)
       str = normalize(str)
-
       case str
         when COMPLEX_REGEX then unit_name, quantity = parse_complex(str)
         when SCIENTIFIC_REGEX then unit_name, quantity = parse_scientific(str)
         when RATIONAL_REGEX then unit_name, quantity = parse_rational(str)
         else raise ArgumentError, "Unable to parse: '#{str}'"
       end
-
       unit_name ||= 'count'
       unit = Unit[unit_name.strip.downcase]
       raise ArgumentError, "Invalid unit: '#{unit_name}'" unless unit
