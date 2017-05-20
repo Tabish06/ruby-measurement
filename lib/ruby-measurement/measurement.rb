@@ -9,7 +9,7 @@ class Measurement
   SCIENTIFIC_REGEX  = /\A#{SCIENTIFIC_NUMBER}\s*#{UNIT_REGEX}?\z/.freeze
   RATIONAL_REGEX    = /\A([+-]?\d+\s+)?((\d+)\/(\d+))?\s*#{UNIT_REGEX}?\z/.freeze
   COMPLEX_REGEX     = /\A#{SCIENTIFIC_NUMBER}?#{SCIENTIFIC_NUMBER}i\s*#{UNIT_REGEX}?\z/.freeze
-  ALPHABET_REGEX    = /[A-z]/.freeze
+  ALPHABET_REGEX    = /[A-z]|"/.freeze
 
   RATIOS = {
     '¼' => '1/4',

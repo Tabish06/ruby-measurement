@@ -34,12 +34,13 @@ Measurement.define(:dam) do |unit|
 end
 
 Measurement.define(:m) do |unit|
-  unit.alias :meter, :meters
+  unit.alias :meter, :meters,:metres,:mtr,:metre
   unit.convert_to(:km) { |value| value / 1_000.0 }
   unit.convert_to(:hm) { |value| value / 100.0 }
   unit.convert_to(:dam) { |value| value / 10.0 }
   unit.convert_to(:dm) { |value| value * 10.0 }
   unit.convert_to(:cm) { |value| value * 100.0 }
+  unit.convert_to(:in) { |value| value * 39.4}
   unit.convert_to(:mm) { |value| value * 1_000.0 }
   unit.convert_to(:µm) { |value| value * 10_000.0 }
 end
@@ -56,11 +57,12 @@ Measurement.define(:dm) do |unit|
 end
 
 Measurement.define(:cm) do |unit|
-  unit.alias :centimeter, :centimeters
+  unit.alias :centimeter, :centimeters,:centimetres,:centimetre
   unit.convert_to(:km) { |value| value / 100_000.0 }
   unit.convert_to(:hm) { |value| value / 10_000.0 }
   unit.convert_to(:dam) { |value| value / 1_000.0 }
   unit.convert_to(:m) { |value| value / 100.0 }
+  unit.convert_to(:in) { |value| (value * 0.39).round(2)}
   unit.convert_to(:dm) { |value| value / 10.0 }
   unit.convert_to(:mm) { |value| value * 10.0 }
   unit.convert_to(:µm) { |value| value * 100.0 }

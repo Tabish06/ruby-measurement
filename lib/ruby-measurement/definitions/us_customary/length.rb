@@ -72,6 +72,8 @@ Measurement.define(:'in.') do |unit|
   unit.convert_to(:fur) { |value| value / 7_920.0 }
   unit.convert_to(:ch) { |value| value / 792.0 }
   unit.convert_to(:ftm) { |value| value / 72.0 }
+  unit.convert_to(:cm) { |value| (value * 2.54).round(2) }
+  unit.convert_to(:m)  {|value| (value * 0.025).round(2) }
   unit.convert_to(:yd) { |value| value / 36.0 }
   unit.convert_to(:ft) { |value| value / 12.0 }
   unit.convert_to(:th) { |value| value * 1000.0 }
